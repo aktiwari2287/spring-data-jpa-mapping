@@ -1,0 +1,29 @@
+<div class="container">
+  <h1 class="text-center">{{title}}</h1>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Book Id</th>
+        <th>Title</th>
+        <th>Publisher</th>
+        <th>Cover</th>
+        <th>ISBN</th>
+        <th>Page</th>
+        <th>Available</th>
+        <th>Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{book.book_id}}</td>
+        <td>{{book.title}}</td>
+        <td>{{book.publisher}}</td>
+        <td>{{book.cover}}</td>
+        <td>{{book.isbn}}</td>
+        <td>{{book.pages}}</td>
+        <td>{{book.available}}</td>
+        <td>{{book.library.name}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
