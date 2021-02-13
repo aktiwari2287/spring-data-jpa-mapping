@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anand.model.Book;
-import com.anand.model.Library;
-import com.anand.repository.BookRepository;
-import com.anand.repository.LibraryRepository;
+import com.anand.service.BookService;
 
 @RestController
 @RequestMapping("/books")
@@ -25,44 +23,27 @@ import com.anand.repository.LibraryRepository;
 public class BookController {
 	
 	@Autowired
-	private BookRepository bookRepository;
+	private BookService bookService;
 	
-	@Autowired
-	private LibraryRepository libraryRepository;
 	
 	@GetMapping("/all")
 	public List<Book> getAllBooks() {
-		return bookRepository.findAll();
+		return bookService.getAllBooks();
 	}
 	
 	@PostMapping("/add/{lib_id}")
 	public Book addBook(@PathVariable("lib_id") long lib_id, @RequestBody Book book) {
-		Library library = libraryRepository.findById(lib_id).orElse(new Library(lib_id, "Default"));
-		book.setLibrary(library);
-		return bookRepository.save(book);
+		return bookService.addBook(lib_id, book);
 	}
 	
 	@DeleteMapping("/remove/{book_id}")
 	public void delete(@PathVariable("book_id") Long book_id) {
-		bookRepository.deleteById(book_id);
+		bookService.delete(book_id);
 	}
 	
 	
 	@PutMapping("/update/{book_id}")
 	public Book updateBook(@PathVariable("book_id") long book_id, @RequestBody Book book) {
-		Book b = bookRepository.findById(book_id).orElse(null);
-		if(b!=null) {
-			b.setAvailable(book.getAvailable());
-			b.setCover(book.getCover());
-			b.setIsbn(book.getIsbn());
-			b.setPages(book.getPages());
-			b.setPublisher(book.getPublisher());
-			b.setTitle(book.getTitle());
-			return bookRepository.saveAndFlush(b);
-		}
-		else {
-			return new Book();
-		}
-		
+		return bookService.updateBook(book_id, book);
 	}
 }

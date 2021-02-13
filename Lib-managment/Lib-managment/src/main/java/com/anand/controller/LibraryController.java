@@ -13,37 +13,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anand.model.Library;
-import com.anand.repository.LibraryRepository;
+import com.anand.service.LibraryService;
 
 @RestController
 @RequestMapping("/libraries")
 public class LibraryController {
 	
 	@Autowired
-	private LibraryRepository libraryRepository;
+	private LibraryService libraryService;
 
 	
 	@GetMapping("/all") 
 	public List<Library> getLibraries(){
-		return libraryRepository.findAll();
+		return libraryService.findAll();
 	}
 	
 	@PostMapping("/add")
 	public List<Library> addLibrary(@RequestBody Library library) {
-		libraryRepository.save(library);
-		return libraryRepository.findAll();
+		return libraryService.addLibrary(library);
 	}
 	
 	@DeleteMapping("/remove/{lib_id}")
 	public void delete(@PathVariable("lib_id") Long lib_id) {
-		libraryRepository.deleteById(lib_id);
+		libraryService.delete(lib_id);
 	}
 	
 	@PutMapping("/update/{lib_id}")
 	public List<Library> updateLibrary(@PathVariable("lib_id") Long lib_id, @RequestBody Library library) {
-		Library lib = libraryRepository.findById(lib_id).orElse(library);
-		lib.setName(library.getName());
-		libraryRepository.save(lib);
-		return libraryRepository.findAll();
+		return libraryService.updateLibrary(lib_id, library);
 	}
 }
