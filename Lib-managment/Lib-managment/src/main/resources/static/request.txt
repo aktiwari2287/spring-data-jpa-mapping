@@ -1,0 +1,34 @@
+{
+    "name":"java",
+    "books":[
+        {
+            "ISBN":"Java1234",
+            "title":"Black books java",
+            "cover":"Java",
+            "publisher":"Anand kumar",
+            "pages":"123",
+            "available":"12"
+        }
+    ]
+}
+
+
+"books":[
+        {
+            "isbn":"12323",
+            "title":"Black books java",
+            "cover":"Java",
+            "publisher":"Anand kumar",
+            "pages":"123",
+            "available":"12"
+        },
+
+        {
+            "isbn":"Php123",
+            "title":"Black books PHP",
+            "cover":"PHP",
+            "publisher":"PP kumar",
+            "pages":"300",
+            "available":"10"
+        }
+    ]
