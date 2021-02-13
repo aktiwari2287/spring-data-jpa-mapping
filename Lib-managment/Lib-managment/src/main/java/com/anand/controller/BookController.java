@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,4 +47,22 @@ public class BookController {
 		bookRepository.deleteById(book_id);
 	}
 	
+	
+	@PutMapping("/update/{book_id}")
+	public Book updateBook(@PathVariable("book_id") long book_id, @RequestBody Book book) {
+		Book b = bookRepository.findById(book_id).orElse(null);
+		if(b!=null) {
+			b.setAvailable(book.getAvailable());
+			b.setCover(book.getCover());
+			b.setIsbn(book.getIsbn());
+			b.setPages(book.getPages());
+			b.setPublisher(book.getPublisher());
+			b.setTitle(book.getTitle());
+			return bookRepository.saveAndFlush(b);
+		}
+		else {
+			return new Book();
+		}
+		
+	}
 }
