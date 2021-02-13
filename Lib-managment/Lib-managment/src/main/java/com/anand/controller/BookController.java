@@ -17,7 +17,6 @@ import com.anand.model.Book;
 import com.anand.model.Library;
 import com.anand.repository.BookRepository;
 import com.anand.repository.LibraryRepository;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @RestController
 @RequestMapping("/books")
