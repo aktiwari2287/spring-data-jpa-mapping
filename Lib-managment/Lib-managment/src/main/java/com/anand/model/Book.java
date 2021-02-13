@@ -29,7 +29,7 @@ public class Book {
 	@Column(name = "available")
 	private int available;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="fk_lib_id")
 	private Library library;
 
