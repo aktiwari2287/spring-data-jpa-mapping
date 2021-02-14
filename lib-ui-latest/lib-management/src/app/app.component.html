@@ -1,5 +1,9 @@
 <div class="container">
   <h1 class="text-center">{{title}}</h1>
+  <select class="form-control" (change)="getBooksForALibrary($event)">
+    <option selected="">Choose Library</option>
+    <option *ngFor="let lib of libraries" value={{lib.lib_id}}>{{lib.name}}</option>
+  </select>
   <table class="table table-striped table-hover">
     <thead>
       <tr>
@@ -23,6 +27,13 @@
         <td>{{book.pages}}</td>
         <td>{{book.available}}</td>
         <td>{{book.library.name}}</td>
+      </tr>
+      <tr *ngIf="len==0">
+        <td colspan="8" class="text-center">
+          <div class="alert alert-danger">
+            No Books found for this Library
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>

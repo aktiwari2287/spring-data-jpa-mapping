@@ -44,7 +44,7 @@ describe('FetchLibraryService', () => {
         expect(books).toEqual(dummyBooks);
       });
 
-      const request = httpTestingController.expectOne(service.ROOT_URL);
+      const request = httpTestingController.expectOne(service.ROOT_URL+'books/all');
       expect(request.request.method).toBe('GET');
       request.flush(dummyBooks);
 
