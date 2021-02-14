@@ -35,6 +35,9 @@ public class Library {
 		this.lib_id = lib_id;
 		this.name = name;
 	}
+	public Library(String name) {
+		this.name = name;
+	}
 	public Library() {
 		super();
 	}
