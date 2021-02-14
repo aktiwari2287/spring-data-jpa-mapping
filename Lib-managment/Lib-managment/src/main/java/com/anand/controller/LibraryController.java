@@ -29,7 +29,7 @@ public class LibraryController {
 	}
 	
 	@PostMapping("/add")
-	public List<Library> addLibrary(@RequestBody Library library) {
+	public Library addLibrary(@RequestBody Library library) {
 		return libraryService.addLibrary(library);
 	}
 	
@@ -39,7 +39,7 @@ public class LibraryController {
 	}
 	
 	@PutMapping("/update/{lib_id}")
-	public List<Library> updateLibrary(@PathVariable("lib_id") Long lib_id, @RequestBody Library library) {
+	public Library updateLibrary(@PathVariable("lib_id") Long lib_id, @RequestBody Library library) {
 		return libraryService.updateLibrary(lib_id, library);
 	}
 }

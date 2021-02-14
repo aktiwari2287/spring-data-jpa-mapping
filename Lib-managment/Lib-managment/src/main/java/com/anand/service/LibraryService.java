@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.anand.exception.ResourceNotFoundException;
 import com.anand.model.Library;
 import com.anand.repository.LibraryRepository;
 
@@ -17,19 +18,18 @@ public class LibraryService {
 		return libraryRepository.findAll();
 	}
 
-	public List<Library> addLibrary(Library library) {
-		libraryRepository.save(library);
-		return libraryRepository.findAll();
+	public Library addLibrary(Library library) {
+		return libraryRepository.save(library);
 	}
 
 	public void delete(Long lib_id) {
 		libraryRepository.deleteById(lib_id);
 	}
 
-	public List<Library> updateLibrary(Long lib_id, Library library) {
-		Library lib = libraryRepository.findById(lib_id).orElse(library);
+	public Library updateLibrary(Long lib_id, Library library) {
+		Library lib = libraryRepository.findById(lib_id)
+				.orElseThrow(()->new ResourceNotFoundException("Library id "+ lib_id + "Not found"));
 		lib.setName(library.getName());
-		libraryRepository.save(lib);
-		return libraryRepository.findAll();
+		return libraryRepository.save(lib);
 	}
 }
