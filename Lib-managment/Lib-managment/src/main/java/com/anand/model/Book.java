@@ -59,6 +59,17 @@ public class Book {
 		this.available = available;
 	}
 
+	public Book(Long book_id, String isbn, String title, String cover, String publisher, int pages, int available) {
+		super();
+		this.book_id=book_id;
+		this.isbn = isbn;
+		this.title = title;
+		this.cover = cover;
+		this.publisher = publisher;
+		this.pages = pages;
+		this.available = available;
+	}
+
 	public String getIsbn() {
 		return isbn;
 	}
