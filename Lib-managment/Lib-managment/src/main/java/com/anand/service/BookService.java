@@ -32,12 +32,6 @@ public class BookService {
 	}
 
 	public Book addBook(Long lib_id, Book book) {
-		/*
-		 * Library library = libraryRepository.findById(lib_id).orElse(null);
-		 * if(library!=null) { book.setLibrary(library); return
-		 * bookRepository.save(book); } else { return null; }
-		 */
-
 		return libraryRepository.findById(lib_id).map((lib) -> {
 			book.setLibrary(lib);
 			return bookRepository.save(book);
@@ -49,18 +43,19 @@ public class BookService {
 	}
 
 	public Book updateBook(Long book_id, Book book) {
-		Book b = bookRepository.findById(book_id).orElse(null);
-		if (b != null) {
+		return bookRepository.findById(book_id).map(b -> {
 			b.setAvailable(book.getAvailable());
 			b.setCover(book.getCover());
 			b.setIsbn(book.getIsbn());
 			b.setPages(book.getPages());
 			b.setPublisher(book.getPublisher());
 			b.setTitle(book.getTitle());
-			return bookRepository.saveAndFlush(b);
-		} else {
-			return new Book();
-		}
+			return bookRepository.save(b);
+		}).orElseThrow(() -> new ResourceNotFoundException("Book with book_id " + book_id + " not found!"));
 
+	}
+	
+	public List<Book> getAllBooksForALibrary(Long lib_id) {
+		return bookRepository.getAllBooksForALibrary(lib_id);
 	}
 }

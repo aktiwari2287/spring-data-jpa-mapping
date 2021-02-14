@@ -46,4 +46,9 @@ public class BookController {
 	public Book updateBook(@PathVariable("book_id") long book_id, @RequestBody Book book) {
 		return bookService.updateBook(book_id, book);
 	}
+	
+	@GetMapping("/all/{lib_id}")
+	public List<Book> getAllBooksForALibrary(@PathVariable("lib_id") Long lib_id) {
+		return bookService.getAllBooksForALibrary(lib_id);
+	}
 }
